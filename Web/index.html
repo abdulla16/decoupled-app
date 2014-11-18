@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Call web service</title>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.1.min.js"></script>
+	<script src="/js/call_web_service.js" ></script>
+	<style type="text/css">
+		.row {
+			margin-bottom: 10px;
+		}
+		.inline-div {
+			display: inline-block;
+		}
+		.label {
+			width:100px;
+		}
+		.field {
+			width: 300px;
+		}
+		.data {
+			height: 200px;
+			width: 400px;
+		}
+	</style>
+</head>
+<body>
+	<div class="row">
+		<div class="inline-div label">Request type:</div>
+		<div class="inline-div">
+			<select class="field" id="requestType">
+				<option value="PUT">PUT</option>
+				<option value="GET">GET</option>
+				<option value="POST">POST</option>
+				<option value="DELETE">DELETE</option>
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="inline-div label">Service name:</div>
+		<div class="inline-div">
+			<input class="field" id="serviceName" type="text" />
+		</div>
+	</div>
+	<div class="row">Data (json format):</div>
+	<div class="row">
+		<textarea class="data" id="data"></textarea>
+	</div>
+	<div class="row">
+		<button id="callService" onclick="callService()">Call service</button>
+	</div>
+	<div class="row">Results:</div>
+	<div class="row" id="results">
+		
+	</div>
+</body>
+</html>
