@@ -23,7 +23,7 @@ interface ServiceInterface
 	
 	/**
 	 * 
-	 * @param \DecoupledApp\Interfaces\ContainerInterface $container
+	 * @param \DecoupledApp\Interfaces\UnitOfWork\UnitOfWorkInterface $unitOfWork
 	 */
-	function __construct(\DecoupledApp\Interfaces\ContainerInterface $container);
+	function setUnitOfWork(\DecoupledApp\Interfaces\UnitOfWork\UnitOfWorkInterface $unitOfWork);
 }

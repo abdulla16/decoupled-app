@@ -12,17 +12,11 @@ abstract class ServiceBase implements \DecoupledApp\Interfaces\Services\ServiceI
 	
 	/**
 	 * 
-	 * @var \DecoupledApp\Interfaces\ContainerInterface
+	 * @see \DecoupledApp\Interfaces\Services\ServiceInterface::setUnitOfWork()
 	 */
-	protected $container;
-	
-	/**
-	 * 
-	 * @see \DecoupledApp\Interfaces\Services\ServiceInterface::__construct()
-	 */
-	public function __construct(\DecoupledApp\Interfaces\ContainerInterface $container) {
-		$this->container = $container;
-		$this->unitOfWork = $this->container->resolve("\\DecoupledApp\\Interfaces\\UnitOfWork\\UnitOfWorkInterface");
+	public function setUnitOfWork(\DecoupledApp\Interfaces\UnitOfWork\UnitOfWorkInterface $unitOfWork)
+	{
+		$this->unitOfWork = $unitOfWork;
 	}
 	
 	/**

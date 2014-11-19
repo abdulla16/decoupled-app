@@ -4,10 +4,6 @@ namespace DecoupledApp\Interfaces\UnitOfWork;
 
 interface UnitOfWorkInterface
 {
-	/**
-	 * @return \DecoupledApp\Interfaces\Repositories\UserRepositoryInterface
-	 */
-	function getUserRepository();
 	
 	/**
 	 * Calls \DecoupledApp\Interfaces\EntityManagerInterface::saveChanges() to save any pending changes to the database in one transaction.
@@ -16,7 +12,18 @@ interface UnitOfWorkInterface
 	
 	/**
 	 * 
-	 * @param \DecoupledApp\Interfaces\ContainerInterface $container
+	 * @param \DecoupledApp\Interfaces\EntityManagerInterface $entityManager
 	 */
-	function setContainer(\DecoupledApp\Interfaces\ContainerInterface $container);
+	function setEntityManager(\DecoupledApp\Interfaces\EntityManagerInterface $entityManager);
+	
+	/**
+	 * 
+	 * @param \DecoupledApp\Interfaces\DataModel\Repositories\UserRepositoryInterfacce $userRepository
+	 */
+	function setUserRepository(\DecoupledApp\Interfaces\DataModel\Repositories\UserRepositoryInterface $userRepository);
+	
+	/**
+	 * @return \DecoupledApp\Interfaces\DataModel\Repositories\UserRepositoryInterface
+	 */
+	function getUserRepository();
 }

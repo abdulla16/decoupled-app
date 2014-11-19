@@ -3,95 +3,130 @@
 namespace DecoupledApp\Container;
 
 /**
- * A concrete implementation of the \DecoupledApp\ContainerInterface. 
- * All of the project object dependencies are registered after this object is instantiated
+ * A concrete implementation of the \DecoupledApp\Interfaces\Container\ContainerInterface. 
  * @author Abdulla
  *
  */
-class Container implements \DecoupledApp\Interfaces\ContainerInterface 
+class Container implements \DecoupledApp\Interfaces\Container\ContainerInterface 
 {
 	/**
-	 * 
-	 * @param string $interfaceName
-	 * @return object|NULL If the $interfaceName is registered, the this function creates the corresponding object and returns it;
-	 * otherwise, this function returns null
+	 * This function resolves the constructor arguments and creates an object
+	 * @param string $dataType
+	 * @return mixed An object
 	 */
-	public function resolve($interfaceName) 
+	private function createObject($dataType)
 	{
-		$interfaceName = trim($interfaceName, "\\");
-		$obj = null;
-		if(isset($this->singletonRegistry[$interfaceName])) 
-		{
-			//TODO: check if the class exists
-			$className = $this->singletonRegistry[$interfaceName];
-			$obj = $className::getInstance();
-		} 
-		else if(isset($this->closureRegistry[$interfaceName]))
-		{
-			$obj = $this->closureRegistry[$interfaceName]();
+		if(!class_exists($dataType)) {
+			throw new \Exception("$dataType class does not exist");
 		}
-		else if(isset($this->typeRegistry[$interfaceName])) 
+		$reflectionClass = new \ReflectionClass($dataType);
+		$constructor = $reflectionClass->getConstructor();
+		$args = null;
+		$obj = null;
+		if($constructor !== null)
 		{
-			//TODO: check if the class exists
-			$reflectionClass = new \ReflectionClass($this->typeRegistry[$interfaceName]);
-			$constructor = $reflectionClass->getConstructor();
-			$args = null;
-			if($constructor !== null)
+			$block = new \phpDocumentor\Reflection\DocBlock($constructor);
+				
+			$tags = $block->getTagsByName("param");
+			if(count($tags) > 0)
 			{
-				$block = new \phpDocumentor\Reflection\DocBlock($constructor);
-			
-				$tags = $block->getTagsByName("param");
-				if(count($tags) > 0)
-				{
-					$args = array();
-				}
-				foreach($tags as $tag)
-				{
-					//resolve constructor parameters
-					$args[] = $this->resolve($tag->getType());
-				}
+				$args = array();
 			}
-			if($args !== null)
+			foreach($tags as $tag)
 			{
-				$obj = $reflectionClass->newInstanceArgs($args);
+				//resolve constructor parameters
+				$args[] = $this->resolve($tag->getType());
 			}
-			else
-			{
-				$obj = $reflectionClass->newInstanceArgs();
-			}
+		}
+		if($args !== null)
+		{
+			$obj = $reflectionClass->newInstanceArgs($args);
+		}
+		else
+		{
+			$obj = $reflectionClass->newInstanceArgs();
 		}
 		
-		if($obj !== null) 
+		return $obj;
+	}
+	
+	/**
+	 * Resolves the properities that have a type that is registered with the Container. 
+	 * @param mixed $obj
+	 */
+	private function resolveProperties(&$obj)
+	{
+		$reflectionClass = new \ReflectionClass(get_class($obj));
+		$props = $reflectionClass->getProperties();
+		foreach($props as $prop)
 		{
-			//Now we need to resolve the object properties
-			$reflectionClass = new \ReflectionClass(get_class($obj));
-			$props = $reflectionClass->getProperties();
-			foreach($props as $prop)
+			$block = new \phpDocumentor\Reflection\DocBlock($prop);
+			
+			//This assumes that there is only one "var" tag.
+			//If there are more than one, then only the first one will be considered.
+			$tags = $block->getTagsByName("var");
+			if(isset($tags[0]))
 			{
-				$block = new \phpDocumentor\Reflection\DocBlock($prop);
-				//This assumes that there is only one "var" tag.
-				//If there are more than one, then only the first one will be considered.
-				$tags = $block->getTagsByName("var");
-				if(isset($tags[0]))
+				$value = $this->resolve($tags[0]->getType());
+				
+				if($value !== null)
 				{
-					$value = $this->resolve($tags[0]->getType());
-					if($value !== null) 
-					{
-						if($prop->isPublic()) {
-							$prop->setValue($obj, $value);
-						} else {
-							$setter = "set".ucfirst($prop->name);
-							if($reflectionClass->hasMethod($setter)) {
-								$rmeth = $reflectionClass->getMethod($setter);
-								if($rmeth->isPublic()){
-									$rmeth->invoke($obj, $value);
-								}
+					if($prop->isPublic()) {
+						$prop->setValue($obj, $value);
+					} else {
+						$setter = "set".ucfirst($prop->name);
+						if($reflectionClass->hasMethod($setter)) {
+							$rmeth = $reflectionClass->getMethod($setter);
+							if($rmeth->isPublic()){
+								$rmeth->invoke($obj, $value);
 							}
 						}
 					}
 				}
 			}
 		}
+	}
+	
+	/**
+	 * 
+	 * @param string $dataType
+	 * @return object|NULL If the $dataType is registered, the this function creates the corresponding object and returns it;
+	 * otherwise, this function returns null
+	 */
+	public function resolve($dataType) 
+	{
+		$dataType = trim($dataType, "\\");
+		$obj = null;
+		if(isset($this->singletonRegistry[$dataType])) 
+		{
+			//TODO: check if the class exists
+			$className = $this->singletonRegistry[$dataType];
+			$obj = $className::getInstance();
+		} 
+		else if(isset($this->closureRegistry[$dataType]))
+		{
+			$obj = $this->closureRegistry[$dataType]();
+		}
+		else if(isset($this->typeRegistry[$dataType])) 
+		{
+			$obj = $this->createObject($this->typeRegistry[$dataType]);
+		}
+		
+		if($obj !== null) 
+		{
+			//Now we need to resolve the object properties
+			$this->resolveProperties($obj);
+		}
+		return $obj;
+	}
+	
+	/**
+	 * @see \DecoupledApp\Interfaces\Container\ContainerInterface::make()
+	 */
+	public function make($dataType)
+	{
+		$obj = $this->createObject($dataType);
+		$this->resolveProperties($obj);
 		return $obj;
 	}
 	

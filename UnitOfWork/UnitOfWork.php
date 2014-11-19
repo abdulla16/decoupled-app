@@ -2,8 +2,8 @@
 namespace DecoupledApp\UnitOfWork;
 
 
+use DecoupledApp\DataModel\Repositories\UserRepository;
 /**
- * This is a singleton class
  * @author Abdulla Al-Qawasmeh
  */
 class UnitOfWork implements \DecoupledApp\Interfaces\UnitOfWork\UnitOfWorkInterface
@@ -30,19 +30,40 @@ class UnitOfWork implements \DecoupledApp\Interfaces\UnitOfWork\UnitOfWorkInterf
 	}
 	
 	/**
-	 * This needs to be public so that the Container::resolve function can set the value of this property.
-	 * @var \DecoupledApp\Interfaces\ContainerInterface
+	 * 
+	 * @var \DecoupledApp\Interfaces\EntityManagerInterface
 	 */
-	private $container;
+	private $entityManager;
 	
-	public function setContainer(\DecoupledApp\Interfaces\ContainerInterface $container)
+	/**
+	 * @see \DecoupledApp\Interfaces\UnitOfWork\UnitOfWorkInterface::setEntityManager()
+	 */
+	public function setEntityManager(\DecoupledApp\Interfaces\EntityManagerInterface $entityManager)
 	{
-		$this->container = $container;
+		$this->entityManager = $entityManager;
 	}
 	
+	/**
+	 * 
+	 * @var \DecoupledApp\Interfaces\DataModel\Repositories\UserRepositoryInterface
+	 */
+	private $userRepository;
+	
+	/**
+	 * @see \DecoupledApp\Interfaces\UnitOfWork\UnitOfWorkInterface::setUserRepository()
+	 */
+	public function setUserRepository(\DecoupledApp\Interfaces\DataModel\Repositories\UserRepositoryInterface $userRepository)
+	{
+		$this->userRepository = $userRepository;
+	}
+	
+	/**
+	 * 
+	 * @see \DecoupledApp\Interfaces\UnitOfWork\UnitOfWorkInterface::getUserRepository()
+	 */
 	public function getUserRepository() 
 	{
-		return $this->container->resolve("\\DecoupledApp\\Interfaces\\DataModel\\Repositories\\UserRepositoryInterface");
+		return $this->userRepository;
 	}
 	
 	/**
@@ -50,6 +71,6 @@ class UnitOfWork implements \DecoupledApp\Interfaces\UnitOfWork\UnitOfWorkInterf
 	 */
 	public function saveChanges() 
 	{
-		$this->container->resolve("\\DecoupledApp\\Interfaces\\EntityManagerInterface")->saveChanges();
+		$this->entityManager->saveChanges();
 	}
 }

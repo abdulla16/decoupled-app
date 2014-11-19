@@ -25,7 +25,7 @@ namespace DecoupledApp\Helpers;
  * @license  AGPL https://www.gnu.org/licenses/agpl
  * @link     http://www.netresearch.de/
  */
-class JsonMapper
+class JsonMapper implements \DecoupledApp\Interfaces\Helpers\JsonMapperInterface
 {
     /**
      * Runtime cache for inspected classes. This is particularly effective if 
