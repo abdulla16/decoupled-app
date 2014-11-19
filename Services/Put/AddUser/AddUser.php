@@ -9,7 +9,7 @@ class AddUser extends \DecoupledApp\Services\ServiceBase
 	 */
 	public function processRequest($requestObject, \DecoupledApp\Interfaces\Services\ServiceResultInterface &$serviceResult) {
 		if($serviceResult->isSuccess()) {
-			$newUser = $this->container->resolve("\\DecoupledApp\\Interfaces\\DataModel\\Entities\\UserInterface");
+			$newUser = $this->unitOfWork->getUserRepository()->getNew();
 			
 			$newUser->setFirstName($requestObject->getFirstName());
 			$newUser->setLastName($requestObject->getLastName());

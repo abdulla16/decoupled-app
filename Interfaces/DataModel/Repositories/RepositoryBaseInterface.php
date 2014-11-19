@@ -23,4 +23,10 @@ interface RepositoryBaseInterface
 	 */
 	function getById($id);
 	
+	/**
+	 * This function returns a new empty entity object. It does NOT persist the entity.
+	 * @return mixed The new entity object
+	 */
+	function getNew();
+	
 }
