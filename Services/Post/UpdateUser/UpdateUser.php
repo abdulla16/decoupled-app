@@ -2,7 +2,7 @@
 
 namespace DecoupledApp\Services\Post\UpdateUser;
 
-class UpdateUser extends \DecoupledApp\Services\Put\AddUser
+class UpdateUser extends \DecoupledApp\Services\Put\AddUser\AddUser
 {
 	/**
 	 * @see \DecoupledApp\Interfaces\Services\ServiceInterface::processRequest()

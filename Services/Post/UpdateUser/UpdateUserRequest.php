@@ -6,7 +6,7 @@ namespace DecoupledApp\Services\Post\UpdateUser;
  * @author Abdulla Al-Qawasmeh
  *
  */
-class UpdateUserRequest extends \DecoupledApp\Services\Put\AddUserRequest
+class UpdateUserRequest extends \DecoupledApp\Services\Put\AddUser\AddUserRequest
 {
 	/**
 	 * 

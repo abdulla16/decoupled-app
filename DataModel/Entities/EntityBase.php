@@ -11,7 +11,7 @@ abstract class EntityBase implements \DecoupledApp\Interfaces\DataModel\Entities
 	 * @see \DecoupledApp\Interfaces\DataModel\Entities\EntityInterface::getId()
 	 */
 	public function getId() {
-		return $this->getId();
+		return $this->id;
 	}
 	
 }
