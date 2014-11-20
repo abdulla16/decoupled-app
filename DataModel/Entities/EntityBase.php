@@ -2,6 +2,11 @@
 
 namespace DecoupledApp\DataModel\Entities;
 
+/**
+ * 
+ * @author Abdulla Al-Qawasmeh
+ *
+ */
 abstract class EntityBase implements \DecoupledApp\Interfaces\DataModel\Entities\EntityInterface
 {
 	/** @Id @Column(type="integer") @GeneratedValue **/

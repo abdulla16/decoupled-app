@@ -5,6 +5,7 @@ namespace DecoupledApp\Interfaces\Container;
 /**
  * This interface is used whenever we need to resolve a specific interface into a concrete object.
  * @author Abdulla Al-Qawasmeh
+ * @link http://software-architecture-php.blogspot.com/2014/11/a-decoupled-application-in-php-putting.html
  * 
  */
 interface ContainerInterface 

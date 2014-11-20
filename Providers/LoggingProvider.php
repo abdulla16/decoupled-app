@@ -5,6 +5,7 @@ namespace DecoupledApp\Providers;
  * This class has two main purposes. First, it ensures we only have one instance of the logger at any time.
  * Second, it provides the configuration for \Monolog\Logger.
  * @author Abdulla Al-Qawasmeh
+ * @link http://software-architecture-php.blogspot.com/2014/11/a-decoupled-application-in-php-putting.html
  *
  */
 class LoggingProvider extends \Monolog\Logger implements \DecoupledApp\Interfaces\Providers\LoggerInterface

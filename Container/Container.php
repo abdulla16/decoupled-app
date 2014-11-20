@@ -4,7 +4,8 @@ namespace DecoupledApp\Container;
 
 /**
  * A concrete implementation of the \DecoupledApp\Interfaces\Container\ContainerInterface. 
- * @author Abdulla
+ * @author Abdulla Al-Qawasmeh
+ * @link http://software-architecture-php.blogspot.com/2014/11/a-decoupled-application-in-php-putting.html
  *
  */
 class Container implements \DecoupledApp\Interfaces\Container\ContainerInterface 
@@ -134,6 +135,7 @@ class Container implements \DecoupledApp\Interfaces\Container\ContainerInterface
 	 *
 	 * @param Array $singletonRegistry
 	 * @param Array $typeRegistry
+	 * @param Array $closureRegistry
 	 */
 	public function __construct($singletonRegistry, $typeRegistry, $closureRegistry) 
 	{
@@ -144,15 +146,17 @@ class Container implements \DecoupledApp\Interfaces\Container\ContainerInterface
 
 	
 	/**
-	 * An array that stores the mappings of an interface to a concrete class. The key/value pair corresond to the interface name/class name pair.
+	 * An array that stores the mappings of an interface to a concrete singleton class. 
+	 * The key/value pair corresond to the interface name/class name pair.
 	 * The interface and class names are all fully qualified (i.e., include the namespaces).
 	 * @var Array
 	 */
 	private $singletonRegistry;
 	
 	/**
-	 * An array that stores the mappings of an interface to a concrete class. The key/value pair corresond to the interface name/class name pair.
-	 * * The interface and class names are all fully qualified (i.e., include the namespaces).
+	 * An array that stores the mappings of an interface to a concrete class. 
+	 * The key/value pair corresond to the interface name/class name pair.
+	 * The interface and class names are all fully qualified (i.e., include the namespaces).
 	 * @var Array
 	 */
 	private $typeRegistry;
@@ -160,7 +164,7 @@ class Container implements \DecoupledApp\Interfaces\Container\ContainerInterface
 	/**
 	 * An array that stores the mappings of an interface to a closure that is used to create and return the concrete object.
 	 * The key/value pair corresond to the interface name/class name pair.
-	 * * The interface and class names are all fully qualified (i.e., include the namespaces).
+	 * The interface and class names are all fully qualified (i.e., include the namespaces).
 	 * @var Array
 	 */
 	private $closureRegistry;

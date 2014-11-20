@@ -1,6 +1,11 @@
 <?php 
 require_once __DIR__."/../../autoload.php";
 
+/**
+ * @author Abdulla Al-Qawasmeh
+ * @link http://software-architecture-php.blogspot.com/2014/11/a-decoupled-application-in-php-putting.html
+ */
+
 $service = extractServiceName($_SERVER['REQUEST_URI']);
 
 if(isset($_REQUEST['data'])) {
@@ -11,7 +16,7 @@ if(isset($_REQUEST['data'])) {
 	while($additionalData = fread($putData, 1024))
 		$data .= $additionalData;
 	fclose($putData);
-} 
+}
 if(empty($data)) {
 	$data = "{}";
 }

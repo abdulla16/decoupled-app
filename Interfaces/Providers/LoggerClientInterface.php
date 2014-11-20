@@ -4,7 +4,7 @@ namespace DecoupledApp\Interfaces\Providers;
 
 /**
  * Any class that needs to utilize the LoggerInterface must implement this interface.
- * @author abdulla
+ * @author Abdulla Al-Qawasmeh
  *
  */
 interface LoggerClientInterface

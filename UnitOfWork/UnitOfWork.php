@@ -3,8 +3,10 @@ namespace DecoupledApp\UnitOfWork;
 
 
 use DecoupledApp\DataModel\Repositories\UserRepository;
+
 /**
  * @author Abdulla Al-Qawasmeh
+ * @link http://software-architecture-php.blogspot.com/2014/11/a-decoupled-application-in-php-putting.html
  */
 class UnitOfWork implements \DecoupledApp\Interfaces\UnitOfWork\UnitOfWorkInterface
 {
