@@ -9,5 +9,8 @@ namespace DecoupledApp\Interfaces\DataModel\Entities;
  */
 interface EntityInterface extends \JsonSerializable
 {
-	
+	/**
+	 * @return int The ID of the entity.
+	 */
+	function getId();
 }

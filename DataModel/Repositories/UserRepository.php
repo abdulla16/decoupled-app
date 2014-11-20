@@ -9,14 +9,6 @@ class UserRepository extends RepositoryBase implements \DecoupledApp\Interfaces\
 		return $query->getResult ();
 	}
 	
-	
-	/**
-	 * @see \DecoupledApp\DataModel\Repositories\RepositoryBase::getById()
-	 */
-	public function getById($id) {
-		return $this->find($id);
-	}
-	
 	/**
 	 * @see \DecoupledApp\Interfaces\DataModel\Repositories\RepositoryBaseInterface::getNew()
 	 */

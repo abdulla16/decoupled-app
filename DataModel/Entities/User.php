@@ -6,10 +6,8 @@ namespace DecoupledApp\DataModel\Entities;
  * @Entity(repositoryClass="\DecoupledApp\DataModel\Repositories\UserRepository")
  * @Table(name="users")
  **/
-class User implements \DecoupledApp\Interfaces\DataModel\Entities\UserInterface
+class User extends EntityBase implements \DecoupledApp\Interfaces\DataModel\Entities\UserInterface
 {
-	/** @Id @Column(type="integer") @GeneratedValue **/
-	protected $id;
 	
 	/** @Column(type="string", name="first_name") **/
 	protected $firstName;
@@ -20,36 +18,49 @@ class User implements \DecoupledApp\Interfaces\DataModel\Entities\UserInterface
 	/** @Column(type="string", name="user_name") **/
 	protected $userName;
 
-	public function getId()
-	{
-		return $this->id;
-	}
-
+	/**
+	 * @see \DecoupledApp\Interfaces\DataModel\Entities\UserInterface::getFirstName()
+	 */
 	public function getFirstName()
 	{
 		return $this->firstName;
 	}
 
+	/**
+	 * @see \DecoupledApp\Interfaces\DataModel\Entities\UserInterface::setFirstName()
+	 */
 	public function setFirstName($firstName)
 	{
 		$this->firstName = $firstName;
 	}
 	
+	/**
+	 * @see \DecoupledApp\Interfaces\DataModel\Entities\UserInterface::getLastName()
+	 */
 	public function getLastName() 
 	{
 		return $this->lastName;
 	}
 	
+	/**
+	 * @see \DecoupledApp\Interfaces\DataModel\Entities\UserInterface::setLastName()
+	 */
 	public function setLastName($lastName) 
 	{
 		$this->lastName = $lastName;
 	}
 	
+	/**
+	 * @see \DecoupledApp\Interfaces\DataModel\Entities\UserInterface::getUserName()
+	 */
 	public function getUserName() 
 	{
 		return $this->userName;
 	}
 	
+	/**
+	 * @see \DecoupledApp\Interfaces\DataModel\Entities\UserInterface::setUserName()
+	 */
 	public function setUserName($userName) 
 	{
 		return $this->userName = $userName;

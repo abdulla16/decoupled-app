@@ -23,6 +23,8 @@ abstract class RepositoryBase extends \Doctrine\ORM\EntityRepository implements 
 	 * 
 	 * @see \DecoupledApp\Interfaces\DataModel\Repositories\RepositoryBaseInterface::getById()
 	 */
-	public abstract function getById($id);
+	public function getById($id) {
+		return $this->find($id);
+	}
 	
 }
