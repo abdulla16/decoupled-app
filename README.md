@@ -32,7 +32,6 @@ Now you can test adding a user:
 2. Select the PUT request type.
 3. Enter service name: addUser.
 4. Enter JSON data:
-
 {"firstName": "First",
 "lastName": "Last",
 "userName": "username"}
