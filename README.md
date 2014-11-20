@@ -8,34 +8,34 @@ http://software-architecture-php.blogspot.com/2014/11/a-decoupled-application-in
 
 Prerequisites:
 
-MySQL (version 5.6.17)
-PHP (version 5.5.12)
-Apache (version 2.4.9)
-Composer
+1. MySQL (version 5.6.17)
+2. PHP (version 5.5.12)
+3. Apache (version 2.4.9)
+4. Composer
 
 The versions above are the version that I used to run the application. It is highly likely that slightly older versions would work as well, I just haven't tested them.
 
 Installation steps:
 
-Download the code from https://github.com/abdulla16/decoupled-app.
+1. Download the code from https://github.com/abdulla16/decoupled-app.
 Navigate to the root directory of the project (decoupled-app) and run command "composer install". This should download the project dependencies into the decoupled-app/vendor directory.
-Create a database called "decoupled_app".
-Create a database user (grant all permissions) with name "d_app_user" and password "123456". Note: you can change these settings as long as you change the information in decoupled-app/Container/bootstrap.php.
-Using the command prompt (or terminal), navigate to directory /Container and run the command "../vendor/bin/doctrine orm:schema-tool:create". This should create the user table under the decoupled_app database.
-Point your Apache server to the directory decoupled-app/Web.
+2. Create a database called "decoupled_app".
+3. Create a database user (grant all permissions) with name "d_app_user" and password "123456". Note: you can change these settings as long as you change the information in decoupled-app/Container/bootstrap.php.
+4. Using the command prompt (or terminal), navigate to directory /Container and run the command "../vendor/bin/doctrine orm:schema-tool:create". This should create the user table under the decoupled_app database.
+5. Point your Apache server to the directory decoupled-app/Web.
 
 That's it!
 
 Now you can test adding a user:
 
-Launch the localhost/index.html page in your browser.
-Select the PUT request type.
-Enter service name: addUser.
-Enter JSON data:
+1. Launch the localhost/index.html page in your browser.
+2. Select the PUT request type.
+3. Enter service name: addUser.
+4. Enter JSON data:
 
 {"firstName": "First",
 "lastName": "Last",
 "userName": "username"}
-Click "Call Service". Now the new user should be created.
+5. Click "Call Service". Now the new user should be created.
 
 
