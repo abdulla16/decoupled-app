@@ -2,7 +2,9 @@
 
 namespace DecoupledApp\Services;
 
-abstract class ServiceBase implements \DecoupledApp\Interfaces\Services\ServiceInterface
+abstract class ServiceBase implements 
+	\DecoupledApp\Interfaces\Services\ServiceInterface,
+	\DecoupledApp\Interfaces\Providers\LoggerClientInterface
 {
 	/**
 	 *
@@ -29,4 +31,17 @@ abstract class ServiceBase implements \DecoupledApp\Interfaces\Services\ServiceI
 	 */
 	public abstract function validate($requestObject, \DecoupledApp\Interfaces\Services\ServiceResultInterface &$serviceResult);
 	
+	/**
+	 * 
+	 * @var \DecoupledApp\Interfaces\Providers\LoggerInterface
+	 */
+	protected $logger;
+	
+	/**
+	 * 
+	 * @see \DecoupledApp\Interfaces\Providers\LoggerClientInterface::setLogger()
+	 */
+	public function setLogger(\DecoupledApp\Interfaces\Providers\LoggerInterface $logger) {
+		$this->logger = $logger;
+	}
 }

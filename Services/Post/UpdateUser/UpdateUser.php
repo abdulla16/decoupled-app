@@ -18,6 +18,7 @@ class UpdateUser extends \DecoupledApp\Services\Put\AddUser\AddUser
 				$user->setUserName($requestObject->getUserName());
 				$this->unitOfWork->saveChanges();
 				$serviceResult->setData("{'statusMessage' : 'The user was updated successfully'}");
+				$this->logger->info("User Updated");
 			}
 			
 			

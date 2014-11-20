@@ -16,6 +16,7 @@ class DeleteUser extends \DecoupledApp\Services\ServiceBase
 				$this->unitOfWork->getUserRepository()->delete($user);
 				$this->unitOfWork->saveChanges();
 				$serviceResult->setData("{'statusMessage' : 'The user was deleted successfully'}");
+				$this->logger->info("User Deleted");
 			}
 			
 			

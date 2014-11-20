@@ -7,7 +7,7 @@ namespace DecoupledApp\Providers;
  * @author Abdulla Al-Qawasmeh
  *
  */
-class LoggingProvider extends \Monolog\Logger
+class LoggingProvider extends \Monolog\Logger implements \DecoupledApp\Interfaces\Providers\LoggerInterface
 {
 	/**
 	 * 

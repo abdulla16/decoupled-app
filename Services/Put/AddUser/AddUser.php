@@ -18,6 +18,7 @@ class AddUser extends \DecoupledApp\Services\ServiceBase
 			$this->unitOfWork->getUserRepository()->add($newUser);
 			$this->unitOfWork->saveChanges();
 			$serviceResult->setData("{'id': '".$newUser->getId()."', statusMessage' : 'The user was added successfully'}");
+			$this->logger->info("User Added");
 		}
 	}
 

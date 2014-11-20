@@ -4,7 +4,7 @@ $singletonRegistry = array();
 $singletonRegistry["DecoupledApp\\Interfaces\\UnitOfWork\\UnitOfWorkInterface"] =
 	"\\DecoupledApp\\UnitOfWork\\UnitOfWork";
 
-$singletonRegistry["DecoupledApp\\Interfaces\\Providers\\LoggingInterface"] =
+$singletonRegistry["DecoupledApp\\Interfaces\\Providers\\LoggerInterface"] =
 "\\DecoupledApp\\Providers\\LoggingProvider";
 
 
